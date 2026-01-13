@@ -66,27 +66,7 @@ DanhGia - Đánh giá của người dùng
 
 SoThich - Địa điểm yêu thích
 
-📁 Cấu Trúc Dự Án
-text
-SMCITY/
-├── src/main/
-│   ├── java/
-│   │   ├── controller/          # Servlet controllers
-│   │   ├── model/              # Data models/entities
-│   │   ├── dao/                # Data Access Objects
-│   │   ├── service/            # Business logic layer
-│   │   └── tienich/            # Utilities (Database connection)
-│   ├── webapp/
-│   │   ├── WEB-INF/
-│   │   │   ├── views/          # JSP pages
-│   │   │   └── web.xml         # Deployment descriptor
-│   │   ├── css/                # Stylesheets
-│   │   ├── js/                 # JavaScript files
-│   │   └── images/             # Hình ảnh
-│   └── resources/
-│       └── database.sql        # Database schema
-├── pom.xml                     # Maven configuration
-└── README.md                   # Tài liệu dự án
+
 ⚡ Cài Đặt và Chạy Dự Án
 1. Yêu Cầu Hệ Thống
 Java JDK 17+
