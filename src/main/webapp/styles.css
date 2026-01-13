@@ -1,0 +1,656 @@
+/* --- 1. LOAD FONT --- */
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('font/Ubuntu-R.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SpaceHabitat';
+    src: url('font/DFVN MBF Space Habitat Regular.otf') format('opentype');
+}
+@font-face {
+    font-family: 'AthenaSignature';
+    src: url('font/SVN-Athena-Signature.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Pistilli';
+    src: url('font/UVF-Pistilli-Roman.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'VNMSans';
+    src: url('font/VNM Sans Std.otf') format('opentype');
+}
+@font-face {
+    font-family: 'VNMSansStd';
+    src: url('font/VNM Sans Std.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Italianno';
+    src: url('font/Italianno-Regular.ttf') format('truetype');
+}
+
+/* --- 2. LOGIN PAGE --- */
+.login-body {
+    margin: 0; padding: 0; font-family: 'Ubuntu', sans-serif;
+    background-image: url('images/login_bg.jpg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    height: 100vh; display: flex; justify-content: center; align-items: center;
+}
+
+.login-container {
+    width: 350px; padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid white; border-radius: 5px;
+    text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    position: relative; z-index: 1;
+}
+
+.login-title {
+    font-family: 'SpaceHabitat', sans-serif; font-size: 40px;
+    margin: 0 0 20px 0; color: #333;
+}
+
+.input-group { text-align: left; margin-bottom: 15px; }
+
+.input-label {
+    display: block; font-family: 'SpaceHabitat', cursive;
+    font-size: 20px; color: #000; margin-bottom: 5px; font-weight: bold;
+}
+
+.login-input {
+    width: 100%; padding: 10px; box-sizing: border-box;
+    border: 1px solid #ccc; border-radius: 3px;
+    font-family: 'Ubuntu', sans-serif; font-size: 16px;
+}
+
+.btn-login {
+    width: 100%; padding: 10px; background-color: #333; color: white; border: none;
+    font-family: 'Ubuntu', sans-serif; font-size: 16px; cursor: pointer;
+    margin-top: 10px; transition: 0.3s;
+}
+.btn-login:hover { background-color: #555; }
+
+.links { margin-top: 20px; font-size: 14px; }
+.links a { text-decoration: none; color: #333; }
+.links a:hover { color: blue; text-decoration: underline; }
+
+/* --- 3. CLOUD ANIMATION --- */
+@keyframes float-left {
+    0% { transform: translateX(100vw); } 100% { transform: translateX(-100vw); }
+}
+@keyframes float-right {
+    0% { transform: translateX(-100vw); } 100% { transform: translateX(100vw); }
+}
+
+.cloud {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('images/cloud_bg.png');
+    background-repeat: no-repeat; pointer-events: none;
+}
+
+.cloud-back {
+    z-index: 0; opacity: 0.6; animation-name: float-left;
+    animation-timing-function: linear; animation-iteration-count: infinite;
+}
+
+.cloud-1 {
+    background-size: 20% auto; background-position: top 10% center;
+    animation-duration: 90s; animation-delay: 0s;
+}
+
+.cloud-2 {
+    background-size: 23% auto; background-position: top 70% center;
+    animation-duration: 70s; animation-delay: -35s;
+}
+
+.cloud-front {
+    z-index: 2; opacity: 0.85; background-size: 16% auto;
+    background-position: top 40% center; animation-name: float-right;
+    animation-timing-function: linear; animation-iteration-count: infinite;
+    animation-duration: 80s; animation-delay: -10s;
+}
+
+/* --- 4. CITY SELECTION PAGE --- */
+.city-selection-body {
+    margin: 0; padding: 0; height: 100vh;
+    display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    background-color: #333; background-size: cover;
+    background-position: center; background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-header { margin-top: 50px; text-align: center; }
+.welcome-text {
+    font-family: 'Pistilli', serif; font-size: 60px; color: white;
+    margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 2px;
+}
+
+.city-display-area {
+    text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+
+.city-name-big {
+    font-family: 'VNMSans', sans-serif; font-size: 100px; color: white;
+    text-transform: uppercase; margin: 0; text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.nav-controls { display: flex; align-items: center; gap: 40px; }
+
+.nav-btn {
+    background: none; border: 2px solid rgba(255,255,255,0.5); color: white;
+    font-size: 24px; width: 50px; height: 50px; border-radius: 50%;
+    cursor: pointer; transition: 0.3s;
+}
+.nav-btn:hover { background: white; color: black; }
+
+.btn-go {
+    padding: 15px 50px; font-family: 'VNMSans', sans-serif; font-size: 20px;
+    background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white;
+    cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s;
+    text-transform: uppercase; letter-spacing: 2px;
+}
+.btn-go:hover { background: white; color: black; transform: scale(1.05); }
+
+.logout-area { margin-bottom: 30px; }
+.btn-logout {
+    text-decoration: none; color: rgba(255,255,255,0.7);
+    font-family: 'Ubuntu', sans-serif; font-size: 16px;
+    border: 1px solid rgba(255,255,255,0.3); padding: 10px 20px;
+    border-radius: 30px; transition: 0.3s;
+}
+.btn-logout:hover { background: rgba(255,0,0,0.7); color: white; border-color: transparent; }
+
+/* --- 5. CITY DETAIL PAGE --- */
+.top-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 40px; background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.top-right-menu a {
+    text-decoration: none; color: #333; margin-left: 15px;
+    font-family: 'Ubuntu', sans-serif; font-weight: bold;
+}
+
+.city-banner {
+    width: 100%; height: 400px; background-size: cover;
+    background-position: center; position: relative;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center; color: white;
+}
+
+.banner-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.banner-content { position: relative; z-index: 2; max-width: 800px; padding: 0 20px; }
+
+.banner-city-name {
+    font-family: 'VNMSansStd', sans-serif; font-size: 80px;
+    text-transform: uppercase; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+
+.banner-rating {
+    font-size: 24px; color: #ffcc00; margin-top: 10px; font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+.banner-desc-text {
+    font-family: 'Italianno', cursive; font-size: 45px; color: #f0f0f0;
+    margin-top: 10px; margin-bottom: 20px; line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); font-weight: 500;
+}
+
+/* LAYOUT 2 CỘT */
+.city-content-container {
+    max-width: 1300px; margin: 0 auto; padding: 20px; display: flex; gap: 30px;
+}
+.left-column { flex: 2.5; min-width: 260px; }
+.right-column { flex: 7.5; overflow: hidden; }
+
+/* MAP BOX */
+.city-map-box {
+    margin-top: 20px; background: white; padding: 10px;
+    border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.city-map-frame { width: 100%; height: 250px; border: none; border-radius: 8px; }
+
+/* RATING WIDGET */
+.rating-wrapper {
+    background: white; padding: 20px; border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px;
+}
+.star-widget { display: inline-block; flex-direction: row-reverse; }
+.star-widget input { display: none; }
+.star-widget label {
+    font-size: 35px; color: #ccc; padding: 5px; float: right;
+    transition: all 0.2s ease; cursor: pointer;
+}
+.star-widget input:not(:checked) ~ label:hover,
+.star-widget input:not(:checked) ~ label:hover ~ label { color: #ffcc00; }
+.star-widget input:checked ~ label { color: #ffcc00; }
+
+
+/* --- 6. TRAVEL CARD & CAROUSEL --- */
+.section-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 15px; margin-top: 30px;
+}
+.section-icon { font-size: 30px; margin-right: 10px; }
+.section-title-text {
+    font-family: 'VNMSans', sans-serif; font-size: 28px; color: #333; margin: 0;
+}
+
+.btn-expand-view {
+    background: none; border: none; cursor: pointer; font-size: 14px;
+    color: #007bff; font-family: 'Ubuntu', sans-serif; display: flex;
+    align-items: center; gap: 5px; transition: 0.3s;
+}
+.btn-expand-view:hover { text-decoration: underline; }
+
+/* Wrapper Carousel */
+.carousel-wrapper {
+    position: relative; display: flex; align-items: center; padding: 0 25px;
+}
+
+/* Container chính */
+.carousel-container {
+    display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth;
+    padding-bottom: 10px; scrollbar-width: none; width: 100%;
+}
+.carousel-container::-webkit-scrollbar { display: none; }
+
+/* Nút Tròn (Mũi tên) */
+.scroll-btn {
+    width: 40px; height: 40px; border-radius: 50%; background: white;
+    border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; position: absolute; z-index: 100; font-size: 18px;
+    color: #333; transition: 0.3s;
+}
+.scroll-btn:hover { background: #007bff; color: white; opacity: 1; }
+.scroll-btn.left { left: 0; }
+.scroll-btn.right { right: 0; }
+
+/* GRID EXPANDED MODE */
+.carousel-container.expanded {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px; overflow-x: visible; padding-right: 0;
+}
+.carousel-container.expanded ~ .scroll-btn { display: none; }
+
+/* CARD ITEM */
+.place-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease;
+    cursor: pointer; text-decoration: none; color: inherit;
+    border: 1px solid #f0f0f0;
+    min-width: 240px; max-width: 240px;
+}
+.place-card:hover {
+    transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.carousel-container.expanded .place-card {
+    min-width: 0 !important; max-width: none !important; width: 100%;
+}
+
+.card-img-container { width: 100%; height: 180px; position: relative; }
+.card-img { width: 100%; height: 100%; object-fit: cover; }
+.card-heart {
+    position: absolute; top: 10px; right: 10px; background: white;
+    width: 30px; height: 30px; border-radius: 50%; display: flex;
+    justify-content: center; align-items: center; color: #ff4d4f;
+    font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.card-body { padding: 15px; }
+.card-title {
+    font-family: 'Ubuntu', sans-serif; font-size: 16px; font-weight: bold;
+    margin: 0 0 5px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card-rating {
+    display: flex; align-items: center; font-size: 14px; color: #555; margin-bottom: 8px;
+}
+.rating-star-icon { color: #ffcc00; margin-right: 5px; }
+.card-address { font-size: 13px; color: #888; display: flex; align-items: center; }
+.card-address i { color: #888; margin-right: 8px; }
+
+/* --- OTHER UI ELEMENTS --- */
+.select-city-modern {
+    padding: 8px 15px; border: 1px solid #ddd; border-radius: 20px;
+    font-family: 'Ubuntu', sans-serif; outline: none; transition: 0.3s;
+}
+.select-city-modern:focus { border-color: #007bff; }
+
+.btn-switch-modern {
+    background: #333; color: white; border: none; padding: 8px 20px;
+    border-radius: 20px; cursor: pointer; font-family: 'Ubuntu', sans-serif;
+    margin-left: 5px; transition: 0.3s;
+}
+.btn-switch-modern:hover { background: #555; transform: scale(1.05); }
+
+/* =========================================
+   8. TRANG CHI TIẾT ĐỊA ĐIỂM (NEW LAYOUT)
+   ========================================= */
+
+/* --- KHUNG CHỨA BANNER VÀ GALLERY --- */
+.place-gallery-banner {
+    position: relative;
+    width: 100%;
+    height: 380px; /* Chiều cao cố định cho khu vực ảnh */
+    overflow: hidden;
+    background: #333; /* Màu nền dự phòng */
+}
+
+/* Ảnh nền mờ (Vẫn giữ nguyên hiệu ứng cũ) */
+.place-bg-blur {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    filter: blur(20px) brightness(0.5); /* Mờ và tối hơn chút để làm nổi ảnh trên */
+    transform: scale(1.1);
+    z-index: 0;
+}
+
+/* Lớp chứa gallery nằm đè lên nền mờ */
+.gallery-overlay-container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center; /* Căn giữa ảnh theo chiều dọc */
+    padding-left: 5%; /* Canh lề trái chút cho đẹp */
+}
+
+/* Danh sách ảnh kiểu mới (Hero Gallery) */
+.image-gallery-hero {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px;
+    /* Ẩn thanh cuộn */
+    scrollbar-width: none; -ms-overflow-style: none;
+}
+.image-gallery-hero::-webkit-scrollbar { display: none; }
+
+/* Style cho từng tấm ảnh trong gallery trên banner */
+.gallery-item {
+    height: 280px; /* Ảnh to rõ */
+    width: auto;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); /* Đổ bóng đậm để nổi bật trên nền mờ */
+    transition: transform 0.3s;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+.gallery-item:hover { transform: scale(1.02); }
+
+/* --- HEADER THÔNG TIN BÊN DƯỚI --- */
+.place-info-header {
+    margin-bottom: 20px;
+}
+
+/* Breadcrumb màu tối */
+.breadcrumb-dark {
+    font-family: 'Ubuntu', sans-serif; font-size: 14px; color: #666;
+    margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* Hàng chứa Tên và Nút Tim */
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Tên địa điểm màu tối, to rõ */
+.place-title-dark {
+    font-family: 'VNMSans', sans-serif;
+    font-size: 48px;
+    margin: 0;
+    color: #333;
+}
+
+/* Nút yêu thích đơn giản (nằm cạnh tên) */
+.btn-fav-simple {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Ubuntu', sans-serif; font-size: 18px;
+    color: #555; padding: 5px 10px; border-radius: 5px;
+    transition: 0.2s; display: flex; align-items: center; gap: 5px;
+}
+.btn-fav-simple:hover { background: #f0f0f0; color: #ff4d4f; }
+.btn-fav-simple.active { color: #ff4d4f; font-weight: bold; }
+.btn-fav-simple.active i { font-weight: 900; /* Icon tim đặc */ }
+
+/* Hàng chứa đánh giá sao */
+.rating-row-dark {
+    display: flex; align-items: center; margin-top: 10px;
+}
+
+/* --- CÁC PHẦN CŨ (Giữ nguyên để bố cục dưới không bị vỡ) --- */
+.place-body { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.info-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px; }
+.sub-title { font-family: 'VNMSans', sans-serif; font-size: 22px; border-left: 5px solid #007bff; padding-left: 10px; margin-bottom: 15px; }
+
+/* --- NÚT ĐIỀU HƯỚNG GALLERY (MỚI) --- */
+.gallery-nav-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4); /* Nền đen mờ */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    flex-shrink: 0; /* Không bị co lại */
+    z-index: 10;
+}
+
+.gallery-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-color: white;
+    transform: scale(1.1);
+}
+
+/* Chỉnh lại container để chứa nút */
+.gallery-overlay-container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa toàn bộ */
+    padding: 0 20px;
+    gap: 15px; /* Khoảng cách giữa nút và ảnh */
+}
+
+/* Chỉnh lại gallery để nó nằm gọn ở giữa */
+.image-gallery-hero {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px;
+    scroll-behavior: smooth; /* Trượt mượt */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    max-width: 90%; /* Giới hạn chiều rộng để chừa chỗ cho nút */
+}
+
+/* --- TÙY CHỈNH SAO CHO KHUNG BÌNH LUẬN --- */
+/* Đặt trong khung comment thì căn giữa cho đẹp */
+.comment-star-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Sao ở đây nhỏ hơn một chút so với trang thành phố để vừa khung */
+.star-widget.small label {
+    font-size: 25px; /* Giảm từ 35px xuống 25px */
+    padding: 2px;
+}
+
+/* Ẩn input radio (Code cũ đã có nhưng thêm lại cho chắc chắn nếu bạn lỡ xóa) */
+.star-widget input { display: none; }
+
+/* --- Thêm đoạn này vào cuối file CSS để chỉnh chữ mô tả to hơn --- */
+.description-text {
+    line-height: 1.8;       /* Khoảng cách dòng cho thoáng */
+    color: #333;            /* Màu chữ */
+    text-align: justify;    /* Căn đều 2 bên lề */
+    font-size: 18px;        /* <--- ĐÂY: Chỉnh số này to lên (ví dụ 18px hoặc 20px) */
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* =========================================
+   9. TRANG CÁ NHÂN (PROFILE)
+   ========================================= */
+
+.profile-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Cột trái: Thông tin & Đổi pass */
+.profile-sidebar {
+    flex: 3.5;
+    min-width: 300px;
+}
+
+/* Cột phải: Sở thích & Lịch sử */
+.profile-main {
+    flex: 6.5;
+    min-width: 400px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.profile-title {
+    font-family: 'VNMSans', sans-serif;
+    font-size: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Input đẹp */
+.profile-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Nút Admin */
+.btn-admin {
+    width: 100%;
+    background: linear-gradient(45deg, #dc3545, #ff6b6b);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+    transition: 0.3s;
+}
+.btn-admin:hover { transform: translateY(-2px); }
+
+/* Danh sách yêu thích */
+.fav-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px dashed #eee;
+    transition: 0.2s;
+}
+.fav-item:hover { background: #f9f9f9; }
+.btn-remove-fav {
+    background: #ffebeb; color: #ff4d4f; border: none;
+    padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 12px;
+}
+.btn-remove-fav:hover { background: #ff4d4f; color: white; }
+
+/* --- LỊCH SỬ HOẠT ĐỘNG (NHẬT KÝ) --- */
+.history-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.sort-select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-family: 'Ubuntu';
+}
+
+.history-item {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+.history-icon {
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+}
+.history-content { flex: 1; }
+.history-time { font-size: 12px; color: #999; margin-bottom: 4px; display: block; }
+.history-link { text-decoration: none; font-weight: bold; color: #007bff; }
+
+/* Phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+.page-btn {
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.page-btn:hover { background: #007bff; color: white; border-color: #007bff; }
+.page-btn:disabled { background: #eee; color: #aaa; cursor: not-allowed; border-color: #eee; }
+
+.description-text {
+    line-height: 1.8;
+    color: #333;
+    text-align: justify;
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+
+    /* QUAN TRỌNG: Dòng này giúp hiển thị dấu xuống dòng đúng như lúc nhập */
+    white-space: pre-line;
+}

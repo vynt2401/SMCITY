@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../images/smcity_logo.png">
+    <title>Quản Trị Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { display: flex; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f6f8; }
+
+        /* SIDEBAR */
+        .sidebar { width: 220px; background: #343a40; color: white; border-right: 1px solid #ccc; padding: 20px; height: 100vh; box-sizing: border-box; position: fixed; }
+        .sidebar h3 { text-align: center; margin-bottom: 30px; color: #ffc107; }
+        .sidebar p a { color: #ddd; text-decoration: none; display: block; padding: 10px; border-radius: 5px; transition: 0.3s; font-size: 16px; }
+        .sidebar p a:hover { background: #495057; color: white; padding-left: 15px; }
+        .content { flex: 1; padding: 20px; margin-left: 220px; overflow-y: auto; height: 100vh; }
+
+        /* MODAL (HỘP THOẠI) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-box {
+            background: white;
+            width: 600px; /* Rộng rãi để sửa ảnh và mô tả */
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-header { font-size: 20px; font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        /* FORM ELEMENTS */
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; }
+        input[readonly] { background-color: #e9ecef; color: #495057; }
+        label { font-weight: 600; font-size: 14px; margin-bottom: 5px; display: block; color: #333; }
+
+        /* TABLE */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        th { background: #007bff; color: white; padding: 12px; text-align: left; }
+        td { border-bottom: 1px solid #eee; padding: 10px; vertical-align: middle; }
+        th:last-child, td:last-child { width: 120px; text-align: center; }
+
+        /* BUTTONS */
+        button { cursor: pointer; padding: 8px 15px; border: none; border-radius: 4px; font-weight: bold; transition: 0.2s; }
+        .btn-green { background: #28a745; color: white; }
+        .btn-blue { background: #007bff; color: white; }
+        .btn-gray { background: #6c757d; color: white; }
+        .btn-action { padding: 5px 10px; margin: 0 2px; font-size: 12px; }
+
+        /* PREVIEW ẢNH */
+        .preview-container {
+            display: flex; gap: 8px; overflow-x: auto; padding: 8px;
+            border: 1px dashed #ccc; border-radius: 4px; height: 80px;
+            margin-bottom: 15px; background: #fdfdfd; align-items: center;
+        }
+        .preview-img { height: 60px; border-radius: 4px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>TRANG QUẢN LÝ</h3>
+    <p><a href="#" onclick="showTab('users')">👤 Quản lý User</a></p>
+    <p><a href="#" onclick="showTab('places')">📍 Quản lý Địa điểm</a></p>
+    <p><a href="#" onclick="showTab('stats')">📊 Thống kê</a></p>
+    <hr style="border-color: #555;">
+    <p><a href="chonThanhPho.html">🏠 Về trang chủ</a></p>
+</div>
+
+<div class="content">
+
+    <div id="tab-users">
+        <h2 style="color: #333;">Danh sách Người Dùng</h2>
+        <div style="background: white; padding: 15px; border-radius: 8px; display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="searchUser" placeholder="Tìm kiếm user..." style="width: 300px; margin-bottom: 0;">
+            <button class="btn-blue" onclick="loadUsers()">Tìm</button>
+            <button class="btn-green" onclick="openModal('modalAddUser')">+ Thêm User</button>
+        </div>
+        <table>
+            <thead><tr><th>Username</th><th>Họ tên</th><th>Hành động</th></tr></thead>
+            <tbody id="tblUsers"></tbody>
+        </table>
+        <div style="margin-top: 15px; text-align: center;">
+            <button onclick="changePageUser(-1)" class="btn-gray">❮ Trước</button>
+            <span id="pageInfoUser" style="margin: 0 15px; font-weight: bold;">1</span>
+            <button onclick="changePageUser(1)" class="btn-gray">Sau ❯</button>
+        </div>
+    </div>
+
+    <div id="tab-places" style="display: none;">
+        <h2 style="color: #333;">Danh sách Địa Điểm</h2>
+        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <label style="display:inline-block; width: auto; margin-right: 10px;">Chọn Thành phố:</label>
+            <select id="adminCitySelect" onchange="loadPlaces()" style="width: 250px; display:inline-block; margin-bottom: 0;"></select>
+            <button class="btn-green" onclick="openModal('modalAddPlace')" style="margin-left: 10px;">+ Thêm Mới</button>
+        </div>
+
+        <table>
+            <thead><tr><th>ID</th><th>Tên & Ảnh đại diện</th><th>Loại hình</th><th>Sửa / Xóa</th></tr></thead>
+            <tbody id="tblPlaces"></tbody>
+        </table>
+        <div style="margin-top: 15px; text-align: center;">
+            <button onclick="changePagePlace(-1)" class="btn-gray">❮ Trước</button>
+            <span id="pageInfoPlace" style="margin: 0 15px; font-weight: bold;">1</span>
+            <button onclick="changePagePlace(1)" class="btn-gray">Sau ❯</button>
+        </div>
+    </div>
+
+    <div id="tab-stats" style="display: none;">
+        <h2 style="color: #333;">Thống Kê Hoạt Động</h2>
+        <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <div style="display: flex; gap: 20px; align-items: flex-end;">
+                <div style="flex: 1;">
+                    <label>Lọc theo Thành phố:</label>
+                    <select id="statsCitySelect" style="margin-bottom: 0;">
+                        <option value="0">-- Tất cả --</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label>Khoảng thời gian:</label>
+                    <select id="statsDays" style="margin-bottom: 0;">
+                        <option value="7">7 ngày qua</option>
+                        <option value="30" selected>30 ngày qua</option>
+                        <option value="90">3 tháng qua</option>
+                        <option value="365">1 năm qua</option>
+                    </select>
+                </div>
+                <button class="btn-blue" onclick="loadStats()" style="height: 42px;">Xem Thống Kê</button>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <canvas id="usageChart" style="width: 100%; height: 400px;"></canvas>
+        </div>
+    </div>
+</div>
+
+<div id="modalAddUser" class="modal">
+    <div class="modal-box" style="width: 400px;">
+        <div class="modal-header">Thêm Người Dùng Mới</div>
+        <label>Tên đăng nhập:</label> <input type="text" id="new_u">
+        <label>Mật khẩu:</label> <input type="password" id="new_p">
+        <label>Họ và Tên:</label> <input type="text" id="new_n">
+        <div style="text-align: right; margin-top: 15px;">
+            <button class="btn-green" onclick="addUser()">Lưu User</button>
+            <button class="btn-gray" onclick="closeModal('modalAddUser')">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalAddPlace" class="modal">
+    <div class="modal-box">
+        <div class="modal-header">Thêm Địa Điểm Mới</div>
+
+        <label>Tên địa điểm:</label>
+        <input type="text" id="p_ten" placeholder="Ví dụ: Quảng trường Lâm Viên">
+
+        <div style="display: flex; gap: 15px;">
+            <div style="flex: 1;">
+                <label>Địa chỉ:</label>
+                <input type="text" id="p_dc" placeholder="Số nhà, đường...">
+            </div>
+            <div style="flex: 1;">
+                <label>Loại hình:</label>
+                <select id="p_loai">
+                    <option value="1">Nhà hàng</option> <option value="2">Khách sạn</option>
+                    <option value="3">Vui chơi</option> <option value="4">Du lịch</option>
+                    <option value="5">Mua sắm</option>
+                </select>
+            </div>
+        </div>
+
+        <label>Hình ảnh (Chọn nhiều ảnh cùng lúc):</label>
+        <div style="display: flex; gap: 10px; margin-bottom: 5px;">
+            <input type="file" id="p_fileInput" multiple accept="image/*" style="display: none;" onchange="handleFileSelect('p')">
+            <button type="button" class="btn-blue" onclick="document.getElementById('p_fileInput').click()">📂 Chọn ảnh từ máy</button>
+            <button type="button" class="btn-gray" onclick="clearImages('p')">Xóa hết</button>
+        </div>
+        <input type="text" id="p_anh" placeholder="Tên file ảnh sẽ hiện ở đây..." readonly>
+
+        <div id="p_preview_container" class="preview-container">
+            <span style="color:#999; font-size:12px; margin: auto;">Chưa có ảnh nào được chọn</span>
+        </div>
+
+        <label>Link Google Map Embed:</label>
+        <input type="text" id="p_map" placeholder="<iframe src=...>">
+
+        <label>Mô tả chi tiết:</label>
+        <textarea id="p_mota" rows="5" placeholder="Viết mô tả, xuống dòng thoải mái..."></textarea>
+
+        <div style="text-align: right; margin-top: 15px;">
+            <button class="btn-green" onclick="addPlace()">Lưu Địa Điểm</button>
+            <button class="btn-gray" onclick="closeModal('modalAddPlace')">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalEditPlace" class="modal">
+    <div class="modal-box">
+        <div class="modal-header">Chỉnh Sửa Địa Điểm</div>
+        <input type="hidden" id="e_id">
+
+        <label>Tên địa điểm:</label> <input type="text" id="e_ten">
+
+        <div style="display: flex; gap: 15px;">
+            <div style="flex: 1;"><label>Địa chỉ:</label> <input type="text" id="e_dc"></div>
+            <div style="flex: 1;">
+                <label>Loại hình:</label>
+                <select id="e_loai">
+                    <option value="1">Nhà hàng</option> <option value="2">Khách sạn</option>
+                    <option value="3">Vui chơi</option> <option value="4">Du lịch</option>
+                    <option value="5">Mua sắm</option>
+                </select>
+            </div>
+        </div>
+
+        <label>Hình ảnh:</label>
+        <div style="display: flex; gap: 10px; margin-bottom: 5px;">
+            <input type="file" id="e_fileInput" multiple accept="image/*" style="display: none;" onchange="handleFileSelect('e')">
+            <button type="button" class="btn-blue" onclick="document.getElementById('e_fileInput').click()">📂 Chọn ảnh mới</button>
+            <button type="button" class="btn-gray" onclick="clearImages('e')">Xóa hết</button>
+        </div>
+        <input type="text" id="e_anh" readonly>
+
+        <div id="e_preview_container" class="preview-container"></div>
+
+        <label>Link Google Map:</label> <input type="text" id="e_map">
+        <label>Mô tả:</label> <textarea id="e_mota" rows="6"></textarea>
+
+        <div style="text-align: right; margin-top: 15px;">
+            <button class="btn-blue" onclick="updatePlace()">Cập nhật thay đổi</button>
+            <button class="btn-gray" onclick="closeModal('modalEditPlace')">Đóng</button>
+        </div>
+    </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi Tiết Địa Điểm</title>
+    <link rel="icon" type="image/png" href="../images/smcity_logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="top-bar">
+    <div>
+        <img src="../images/smcity_logo.png" style="height: 30px; vertical-align: middle; margin-right: 10px;">
+        <button id="btnBack" class="btn-switch-modern">❮ Quay lại</button>
+    </div>
+    <div class="top-right-menu">
+        <span id="userHello" style="font-weight: bold; color: #555;">Xin chào</span> |
+        <a href="profile.html" id="linkProfile" style="color:#007bff;">Trang cá nhân</a> |
+        <a href="#" onclick="logout()" style="color: red;">Đăng xuất</a>
+    </div>
+</div>
+
+<div class="place-gallery-banner">
+    <div id="placeBgBlur" class="place-bg-blur"></div>
+    <div class="gallery-overlay-container">
+        <button class="gallery-nav-btn left" onclick="scrollGallery(-300)">❮</button>
+        <div id="galleryList" class="image-gallery-hero">
+            <p style="color: white;">Đang tải hình ảnh...</p>
+        </div>
+        <button class="gallery-nav-btn right" onclick="scrollGallery(300)">❯</button>
+    </div>
+</div>
+
+<div class="place-body">
+
+    <div class="place-info-header">
+        <div id="breadcrumb" class="breadcrumb-dark">Đang tải...</div>
+        <div class="title-row">
+            <h1 id="ddTen" class="place-title-dark">LOADING...</h1>
+            <button id="btnFavorite" class="btn-fav-simple">
+                <i class="far fa-heart"></i> Yêu thích
+            </button>
+        </div>
+        <div class="rating-row-dark">
+            <span style="color: #ffcc00; font-size: 1.2em;">★</span>
+            <span id="ddSao" style="font-weight: bold; font-size: 1.2em;">0.0</span>
+            <span style="color: #777; margin-left: 5px;">(Đánh giá từ cộng đồng)</span>
+        </div>
+    </div>
+
+    <hr style="margin-bottom: 30px;">
+
+    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+
+        <div style="flex: 6.5; min-width: 450px;">
+            <div class="info-box">
+                <h3 class="sub-title">Giới thiệu</h3>
+                <p id="ddMoTa" class="description-text">...</p>
+
+                <h3 class="sub-title" style="margin-top: 40px;">Thông tin liên hệ</h3>
+                <div class="contact-info-text">
+                    <p><b>📍 Địa chỉ:</b> <span id="ddDiaChi">...</span></p>
+                    <p><b>🏷️ Phân loại:</b> <span id="ddLoai">...</span></p>
+                </div>
+            </div>
+
+            <div id="mapContainer" class="info-box" style="display: none; padding: 10px;">
+                <iframe id="googleMapFrame" src="" width="100%" height="350" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div style="flex: 3.5; min-width: 350px;">
+            <div class="info-box" style="position: sticky; top: 100px;">
+                <h3 class="sub-title" style="font-size: 22px; text-align: center;">Đánh giá của bạn</h3>
+
+                <div style="margin-bottom: 20px; background: #f8f9fa; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div class="comment-star-box">
+                        <div class="star-widget small">
+                            <input type="radio" name="cmtRate" id="rate-5" value="5"><label for="rate-5" class="fas fa-star"></label>
+                            <input type="radio" name="cmtRate" id="rate-4" value="4"><label for="rate-4" class="fas fa-star"></label>
+                            <input type="radio" name="cmtRate" id="rate-3" value="3"><label for="rate-3" class="fas fa-star"></label>
+                            <input type="radio" name="cmtRate" id="rate-2" value="2"><label for="rate-2" class="fas fa-star"></label>
+                            <input type="radio" name="cmtRate" id="rate-1" value="1"><label for="rate-1" class="fas fa-star"></label>
+                        </div>
+                    </div>
+
+                    <textarea id="cmtText" rows="5" style="width: 100%; padding: 12px; box-sizing: border-box; border-radius: 8px; border: 1px solid #ddd; margin-top: 15px; font-family: 'Ubuntu', sans-serif; font-size: 15px;" placeholder="Chia sẻ trải nghiệm..."></textarea>
+
+                    <button id="btnSendComment" style="width: 100%; margin-top: 15px; padding: 12px; background: #333; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; font-size: 16px;">Gửi Đánh Giá</button>
+                </div>
+
+                <h4 style="margin-bottom: 15px; font-size: 18px; border-bottom: 2px solid #eee; padding-bottom: 10px;">Bình luận gần đây</h4>
+                <div id="commentList" style="max-height: 500px; overflow-y: auto; padding-right: 5px;">
+                    <p style="font-size: 14px; color: #888;">Đang tải...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <h3 class="sub-title">📌 Có thể bạn cũng thích</h3>
+    <div class="carousel-wrapper">
+        <div class="scroll-btn left" onclick="scrollRec('recList', -300)">❮</div>
+        <div class="carousel-container" id="recList" style="padding-bottom: 10px;"></div>
+        <div class="scroll-btn right" onclick="scrollRec('recList', 300)">❯</div>
+    </div>
+</div>
+
+<script src="DiaDiem.js"></script>
+</body>
+</html>
