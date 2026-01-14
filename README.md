@@ -164,7 +164,7 @@ bash
 mvn test
 ```
 
-## Kiểm tra từng module
+## Kiểm tra từng module trước khi chạy chính
 ## - Test đăng nhập
 ## - Test thêm địa điểm
 ## - Test đánh giá
@@ -176,13 +176,6 @@ GET	/thanhpho/{id}	Chi tiết thành phố
 POST	/dangnhap	Đăng nhập
 POST	/danhgia	Gửi đánh giá
 GET	/dia-diem/search	Tìm kiếm địa điểm
-
-## Clone
-
-```
-git clone https://github.com/vynt2401/SMCITY.git
-```
-
 
 Tác giả: 
 [vynt2401](https://github.com/vynt2401)
