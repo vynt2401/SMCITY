@@ -80,6 +80,7 @@ Apache Tomcat 10+
 Git
 
 2. Cài Đặt Cơ Sở Dữ Liệu
+```
 sql
 -- Tạo database
 CREATE DATABASE smart_city_db;
@@ -87,7 +88,10 @@ USE smart_city_db;
 
 -- Chạy file database.sql trong thư mục resources
 -- hoặc import trực tiếp
+```
+
 3. Cấu Hình Dự Án
+```
 bash
 # Clone repository
 git clone https://github.com/vynt2401/SMCITY.git
@@ -99,7 +103,10 @@ public static Connection getConnection() {
     String user = "root";  # Thay đổi theo cấu hình của bạn
     String password = "your_password";  # Thay đổi theo cấu hình của bạn
 }
+```
 4. Build và Deploy
+
+```
 bash
 # Build với Maven
 mvn clean package
@@ -110,26 +117,29 @@ mvn clean package
 # - Khởi động Tomcat
 5. Chạy Trong IDE (IntelliJ/Eclipse)
 Import project như Maven project
-
+```
 Cấu hình Tomcat Server
-
+```
 Add deployment artifact
 
 Run trên Tomcat
+```
 
 🔑 Tài Khoản Mẫu
+
 Vai Trò	Username	Password	Quyền Hạn
 👑 Admin	admin	123	Toàn quyền quản trị
-👤 User	user1	123	Đánh giá, yêu thích
-🌐 Truy Cập Ứng Dụng
+
 Sau khi deploy thành công, truy cập:
-
+```
 URL: http://localhost:8080/SMCITY
-
+```
 Port mặc định: 8080 (có thể thay đổi tùy cấu hình Tomcat)
 
-📊 Database Schema
+```
+Database Schema
 https://docs/ERD.png
+```
 
 Các bảng chính:
 
@@ -147,63 +157,31 @@ SoThich: Địa điểm yêu thích của người dùng
 
 LoaiHinh: Phân loại địa điểm
 
-🧪 Testing
+## Testing
+```
 bash
 # Kiểm tra kết nối database
 mvn test
+```
 
-# Kiểm tra từng module
-# - Test đăng nhập
-# - Test thêm địa điểm
-# - Test đánh giá
-📝 API Endpoints
+## Kiểm tra từng module
+## - Test đăng nhập
+## - Test thêm địa điểm
+## - Test đánh giá
+
+## API Endpoints
 Method	Endpoint	Mô Tả
 GET	/thanhpho	Danh sách thành phố
 GET	/thanhpho/{id}	Chi tiết thành phố
 POST	/dangnhap	Đăng nhập
 POST	/danhgia	Gửi đánh giá
 GET	/dia-diem/search	Tìm kiếm địa điểm
-🔒 Bảo Mật
-Xác thực: Session-based authentication
 
-Phân quyền: Role-based access control
+## Clone
 
-SQL Injection: Sử dụng PreparedStatement
-
-XSS: Escape special characters in output
-
-🐛 Troubleshooting
-Lỗi phổ biến và giải pháp:
-Lỗi kết nối database:
-
-Kiểm tra MySQL đang chạy
-
-Kiểm tra username/password trong KetNoiCSDL.java
-
-Lỗi 404 - Page not found:
-
-Kiểm tra context path trong Tomcat
-
-Kiểm tra web.xml configuration
-
-Lỗi encoding tiếng Việt:
-
-java
-request.setCharacterEncoding("UTF-8");
-response.setCharacterEncoding("UTF-8");
-🤝 Đóng Góp
-Fork repository
-
-Tạo feature branch (git checkout -b feature/AmazingFeature)
-
-Commit changes (git commit -m 'Add some AmazingFeature')
-
-Push to branch (git push origin feature/AmazingFeature)
-
-Mở Pull Request
-
-📄 Giấy Phép
-Dự án được phân phối dưới giấy phép MIT. Xem file LICENSE để biết thêm chi tiết.
+```
+git clone https://github.com/vynt2401/SMCITY.git
+```
 
 
 Tác giả: 
@@ -222,12 +200,7 @@ Font Awesome - Icons
 
 Google Maps API - Map integration
 
-⭐ Nếu bạn thấy dự án hữu ích, hãy để lại một star trên GitHub!
 
-📊 Thống Kê
-https://img.shields.io/github/repo-size/vynt2401/SMCITY
-https://img.shields.io/github/last-commit/vynt2401/SMCITY
-https://img.shields.io/github/issues/vynt2401/SMCITY
 
 Phiên bản hiện tại: 1.0.0
 Cập nhật lần cuối: Tháng 1, 2026
