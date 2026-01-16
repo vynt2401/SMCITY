@@ -1,18 +1,19 @@
-🏙️ SMCITY - Hệ Thống Đánh Giá Thành Phố Thông Minh
+# SMCITY - Hệ Thống Đánh Giá Thành Phố Thông Minh
 
-📋 Giới Thiệu
+## Giới thiệu
 SMCITY là một hệ thống web đánh giá và khám phá các thành phố thông minh, cho phép người dùng:
 
-🔍 Khám phá thông tin về các thành phố và địa điểm du lịch
+### Khám phá thông tin về các thành phố và địa điểm du lịch
 
-⭐ Đánh giá, bình luận về thành phố và địa điểm
+### Đánh giá, bình luận về thành phố và địa điểm
 
-❤️ Lưu các địa điểm yêu thích
+### Lưu các địa điểm yêu thích
 
-👥 Phân quyền người dùng (Admin/User)
+### Phân quyền người dùng (Admin/User)
 
-🚀 Tính Năng Chính
-🎯 Cho Người Dùng
+## Tính Năng Chính
+
+### Cho Người Dùng
 Đăng ký/Đăng nhập với xác thực
 
 Tìm kiếm thành phố và địa điểm theo loại hình
@@ -23,7 +24,7 @@ Thêm vào danh sách yêu thích
 
 Xem bản đồ tích hợp Google Maps
 
-⚙️ Cho Quản Trị Viên
+## Cho Quản Trị Viên
 Quản lý thành phố (thêm, sửa, xóa)
 
 Quản lý địa điểm theo từng thành phố
@@ -32,8 +33,9 @@ Quản lý loại hình địa điểm
 
 Quản lý người dùng và đánh giá
 
-🛠️ Công Nghệ Sử Dụng
-Backend
+## Công Nghệ Sử Dụng
+### Backend
+```
 Java 17+ - Ngôn ngữ lập trình chính
 
 Servlet/JSP - Xử lý request và hiển thị view
@@ -41,8 +43,10 @@ Servlet/JSP - Xử lý request và hiển thị view
 Maven - Quản lý dependencies
 
 JDBC - Kết nối cơ sở dữ liệu
+```
 
-Frontend
+### Frontend
+```
 HTML5/CSS3 - Cấu trúc và giao diện
 
 JavaScript - Xử lý tương tác
@@ -50,8 +54,10 @@ JavaScript - Xử lý tương tác
 Bootstrap 5 - Framework CSS
 
 JSTL - Hiển thị dữ liệu động
+```
 
-Database
+### Database
+```
 MySQL 8+ - Hệ quản trị cơ sở dữ liệu
 
 Database Schema:
@@ -65,10 +71,11 @@ DiaDiem - Thông tin địa điểm
 DanhGia - Đánh giá của người dùng
 
 SoThich - Địa điểm yêu thích
+```
 
-
-⚡ Cài Đặt và Chạy Dự Án
+## Cài Đặt và Chạy Dự Án
 1. Yêu Cầu Hệ Thống
+```
 Java JDK 17+
 
 Apache Maven 3.8+
@@ -78,7 +85,7 @@ MySQL 8.0+
 Apache Tomcat 10+
 
 Git
-
+```
 2. Cài Đặt Cơ Sở Dữ Liệu
 ```
 sql
@@ -125,10 +132,10 @@ Add deployment artifact
 Run trên Tomcat
 ```
 
-🔑 Tài Khoản Mẫu
+### Tài Khoản Mẫu
 
-Vai Trò	Username	Password	Quyền Hạn
-👑 Admin	admin	123	Toàn quyền quản trị
+Username admin
+Password 123
 
 Sau khi deploy thành công, truy cập:
 ```
